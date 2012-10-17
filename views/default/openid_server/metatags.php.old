@@ -1,0 +1,23 @@
+<?php
+
+	/**
+	 * Adds metatags to identify OpenID server
+	 * 
+	 * @package ElggOpenID
+	 * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
+	 * @author Kevin Jardine <kevin@radagast.biz>
+	 * @copyright Curverider Ltd 2008-2009
+	 * @link http://elgg.org/
+	 * 
+	 */
+
+?>
+
+<!-- 
+
+why does this not work?
+
+<link rel="openid.server" href="<?php print $CONFIG->wwwroot; ?>mod/openid_server/server.php" />
+<link rel="openid2.provider" href="<?php print $CONFIG->wwwroot; ?>mod/openid_server/server.php" />
+
+-->
