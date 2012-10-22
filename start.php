@@ -24,7 +24,7 @@
 global $CONFIG;
 set_include_path($CONFIG->path . 'mod/openid_api/vendors/php-openid/' . PATH_SEPARATOR . $CONFIG->path . 'mod/openid_server/');
 
-register_elgg_event_handler('init','system','openid_server_init',1);
+elgg_register_event_handler('init','system','openid_server_init',1);
 
 function openid_server_init() {
 
