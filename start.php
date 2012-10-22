@@ -32,7 +32,7 @@ function openid_server_init() {
 	elgg_register_event_handler('login','user','openid_server_handle_login');
 	elgg_register_event_handler('logout','user','openid_server_handle_logout');
  
-	 set_view_location("openid_server/forms/trust", $CONFIG->path.'mod/openid_server/views/');
+	elgg_set_view_location("openid_server/forms/trust", $CONFIG->path.'mod/openid_server/views/');
     
 	$base = elgg_get_plugins_path() . 'openid_server/actions';
 	elgg_register_action('openid_server/trust', "$base/trust.php", 'public');
