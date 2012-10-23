@@ -62,7 +62,7 @@ class OpenIDServer_ElggStore extends Auth_OpenID_OpenIDStore {
                         'server_url'    => $server_url,
                         'handle'        => $handle
             );
-	    $assocs = elgg_get_entities_from_metadata(array('metadata_name_value_pairs' => $meta_array), 'types' => 'object', 'subtypes' => 'openid_client::association', 'metadata_name_value_pairs_operator' => 'and');
+	    $assocs = elgg_get_entities_from_metadata(array('metadata_name_value_pairs' => $meta_array, 'types' => 'object', 'subtypes' => 'openid_client::association', 'metadata_name_value_pairs_operator' => 'and'));
         } else {
 	    $assocs = elgg_get_entities_from_metadata(array('metadata_names' => 'server_url', 'metadata_values' => $server_url, 'types' => 'object', 'subtypes' => 'openid_client::association', 'metadata_case_sensitive' => FALSE));
         }
@@ -113,7 +113,7 @@ class OpenIDServer_ElggStore extends Auth_OpenID_OpenIDStore {
                         'server_url'    => $server_url,
                         'handle'        => $handle
             );
-	    $entities = elgg_get_entities_from_metadata(array('metadata_name_value_pairs' => $meta_array), 'types' => 'object', 'subtypes' => 'openid_client::association', 'metadata_name_value_pairs_operator' => 'and');
+	    $entities = elgg_get_entities_from_metadata(array('metadata_name_value_pairs' => $meta_array, 'types' => 'object', 'subtypes' => 'openid_client::association', 'metadata_name_value_pairs_operator' => 'and'));
         } else {
 	    $entities = elgg_get_entities_from_metadata(array('metadata_names' => 'server_url', 'metadata_values' => $server_url, 'types' => 'object', 'subtypes' => 'openid_client::association', 'metadata_case_sensitive' => FALSE));
         }
@@ -169,7 +169,7 @@ class OpenIDServer_ElggStore extends Auth_OpenID_OpenIDStore {
                         'salt'          => $salt
         );
         
-	$entities = elgg_get_entities_from_metadata(array('metadata_name_value_pairs' => $meta_array), 'types' => 'object', 'subtypes' => 'openid_client::nonce', 'metadata_name_value_pairs_operator' => 'and');
+	$entities = elgg_get_entities_from_metadata(array('metadata_name_value_pairs' => $meta_array, 'types' => 'object', 'subtypes' => 'openid_client::nonce', 'metadata_name_value_pairs_operator' => 'and'));
         
         if ($entities) {
             // bad - this nonce is already in use
@@ -295,7 +295,7 @@ class OpenIDServer_ElggStore extends Auth_OpenID_OpenIDStore {
                         'trust_root'    => $trust_root
             );
         
-	    $results = elgg_get_entities_from_metadata(array('metadata_name_value_pairs' => $meta_array), 'types' => 'object', 'subtypes' => 'openid_server::trust_root', 'metadata_name_value_pairs_operator' => 'and');
+	    $results = elgg_get_entities_from_metadata(array('metadata_name_value_pairs' => $meta_array, 'types' => 'object', 'subtypes' => 'openid_server::trust_root', 'metadata_name_value_pairs_operator' => 'and'));
 	   	
    			if ($results) {
        			foreach($results as $trust_root) {
