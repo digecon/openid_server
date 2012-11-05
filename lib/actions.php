@@ -23,8 +23,6 @@ function action_default()
 
     $request = $server->decodeRequest();
     
-    error_log("in action_default, request = ".print_r($request,true));
-
     if (!$request) {
         return ""; //about_render();
     }
@@ -34,27 +32,26 @@ function action_default()
     if (in_array($request->mode,
                  array('checkid_immediate', 'checkid_setup'))) {
                      
-        error_log("in action_default, about to run isTrusted");
-
-        if (isTrusted($request->identity, $request->trust_root, $request->return_to)) {
-            error_log("in action_default, yes, is trusted");
-            $response =& $request->answer(true);
+        
+        $identity = getLoggedInUser();
+        if (isTrusted($identity, $request->trust_root, $request->return_to)) {
+            if ($request->message->isOpenID1()) {
+	            $response =& $request->answer(true);
+	    } else {
+	            $response =& $request->answer(true, false, getServerURL(), $identity);
+	    }
         } else if ($request->immediate) {
-             error_log("in action_default, yes, immediate");
             $response =& $request->answer(false, getServerURL());
         } else {
             if (!getLoggedInUser()) {
-                 error_log("in action_default, calling login render");
                 #return login_render();
                 system_message(elgg_echo('openid_server:not_logged_in'));
                 return gatekeeper();
                 #return action_login();
             }
-             error_log("in action_default, calling trust render");
             return trust_render($request);
         }
-        error_log("in action_default, about to add sreg fields");
-		addSregFields(&$response);
+	addSregFields(&$response);
 
     } else {
         $response =& $server->handleRequest($request);
@@ -149,7 +146,6 @@ function action_trust()
     $info = getRequestInfo();
     $trusted = isset($_POST['trust']);
     if ($info && isset($_POST['remember'])) {
-        error_log("setTrustedSite0");
         $store->setTrustedSite($info->trust_root);
     }
     return doAuth($info, $trusted, true);
