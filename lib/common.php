@@ -5,7 +5,7 @@ require_once "session.php";
 require_once "Auth/OpenID/Server.php";
 require_once "Auth/OpenID/SReg.php";
 try {
-                include_once "Auth/OpenID/HMACSHA1.php";
+ //               include_once "Auth/OpenID/HMACSHA1.php";
 } catch(Exception $e) {
                 // new way :P
                 require_once "Auth/OpenID/HMAC.php";
@@ -70,7 +70,7 @@ function addSregFields(&$response,$info, $req_url)
     
         $sreg_response = Auth_OpenID_SRegResponse::extractResponse(
                                               $sreg_request, $sreg_data);
-	error_log('DEBUG:' . (string)($response->fields));
+	//error_log('DEBUG:' . (string)($response->fields));
         $sreg_response->toMessage($response->fields);
     }
 
