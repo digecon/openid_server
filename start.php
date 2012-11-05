@@ -10,25 +10,17 @@
  * @link http://elgg.com/
  */
  
- /*
- 
- To do here:
- 
- - put server link in profile page
- 
-*/
-/*FIXME check if this extend is working or delete it*/
-//extend_view('page_elements/header_contents', 'page_elements/openid_linkrel');
-
-//set_include_path(get_include_path() . PATH_SEPARATOR . $CONFIG->path . 'mod/openid_server/');
 global $CONFIG;
-set_include_path($CONFIG->path . 'mod/openid_api/vendors/php-openid/' . PATH_SEPARATOR . $CONFIG->path . 'mod/openid_server/');
+if (get_include_path())
+	set_include_path(get_include_path() . PATH_SEPARATOR . $CONFIG->path . 'mod/openid_api/vendors/php-openid/' . PATH_SEPARATOR . $CONFIG->path . 'mod/openid_server/');
+else
+	set_include_path($CONFIG->path . 'mod/openid_api/vendors/php-openid/' . PATH_SEPARATOR . $CONFIG->path . 'mod/openid_server/');
 
 elgg_register_event_handler('init','system','openid_server_init',1);
 
 function openid_server_init() {
 
-	 global $CONFIG;
+	global $CONFIG;
 	elgg_register_event_handler('login','user','openid_server_handle_login');
 	elgg_register_event_handler('logout','user','openid_server_handle_logout');
  
@@ -37,9 +29,10 @@ function openid_server_init() {
 	$base = elgg_get_plugins_path() . 'openid_server/actions';
 	elgg_register_action('openid_server/trust', "$base/trust.php", 'public');
 
-     //elgg_extend_view("metatags", "openid_server/metatags");
-     elgg_extend_view("page/elements/head", "openid_server/metatags");
-     elgg_extend_view("xrds/services", "openid_server/service");
+        elgg_extend_view("metatags", "openid_server/metatags");
+        elgg_extend_view("page/elements/head", "openid_server/metatags");
+        elgg_extend_view("xrds/services", "openid_server/service");
+        elgg_extend_view("profile/wrapper", "openid_server/profile");
 }
 
 

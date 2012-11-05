@@ -13,7 +13,7 @@ require_once 'Auth/OpenID.php';
 require_once 'Auth/OpenID/Interface.php';
 require_once 'Auth/OpenID/Consumer.php';
 try {
-                include_once "Auth/OpenID/HMACSHA1.php";
+ //               include_once "Auth/OpenID/HMACSHA1.php";
 } catch(Exception $e) {
 		// new way :P
                 require_once "Auth/OpenID/HMAC.php";
@@ -68,7 +68,6 @@ class OpenIDServer_ElggStore extends Auth_OpenID_OpenIDStore {
         }
         
         if (!$assocs || (count($assocs) == 0)) {
-            error_log("in getAssociations - cannot get associations for server url: $server_url, handle: $handle");
             return null;
         } else {
             $associations = array();
@@ -138,8 +137,6 @@ class OpenIDServer_ElggStore extends Auth_OpenID_OpenIDStore {
 		$association_obj->access_id = 2;
 		$association_obj->title = 'association';
 		
-		error_log("in storeAssociation, attempting to save association with new handle: ".$association->handle);
-		
 		if ($association_obj->save()) {		
     		$association_obj->server_url = $server_url;
     		$association_obj->handle = $association->handle;
@@ -147,7 +144,6 @@ class OpenIDServer_ElggStore extends Auth_OpenID_OpenIDStore {
             $association_obj->issued = $association->issued;
             $association_obj->lifetime = $association->lifetime;
             $association_obj->assoc_type = $association->assoc_type;
-            error_log("in storeAssociation, saved association with new handle: ".$association->handle);
     		return true;
 		} else {
     		return false;
@@ -201,7 +197,6 @@ class OpenIDServer_ElggStore extends Auth_OpenID_OpenIDStore {
 		if ($results) {
     		foreach ($results as $site) {
     			$sites[] = $site->trust_root;
-		error_log("GET TRUST".$site->trust_root);
     		}
 		}
 		return $sites;
@@ -249,7 +244,6 @@ class OpenIDServer_ElggStore extends Auth_OpenID_OpenIDStore {
 	function setTrustedSite($trust_root) {
    		$openid_url = getLoggedInUser();
    		$site = new ElggObject();
-		error_log("SET TRUST-"."X".$trust_root->site_name."X".$trust_root->trust_root.":-:".$openid_url);
 		$site->subtype = 'openid_server::trust_root';
 		$site->owner_guid = 0;
 		$site->title = 'association';

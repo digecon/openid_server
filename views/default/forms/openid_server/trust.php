@@ -18,7 +18,7 @@
 $user = elgg_get_logged_in_user_entity();
 $openid_trust_root = elgg_extract('openid_trust_root', $vars);
 
-echo '<div>' . elgg_echo('openid_server:trust_question', array($openid_trust_root, elgg_get_site_entity()->name, $user->username));
+echo '<div>' . elgg_echo('openid_server:trust_question', array($openid_trust_root, elgg_get_site_entity()->name . ":" .  $user->username));
 
 /*echo '<div class="mll">'.elgg_view('input/checkbox', array(
 	'name' => 'name',

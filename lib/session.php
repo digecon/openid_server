@@ -77,7 +77,6 @@ function getServer()
     global $CONFIG;
     static $server;
     $op_endpoint = getServerURL();
-    error_log("In getServer()");
     if (!isset($server)) {
         $server =& new Auth_OpenID_Server(getOpenIDServerStore(),$op_endpoint);
     }
@@ -131,7 +130,6 @@ function getRequestInfo()
 
 function setRequestInfo($info=null)
 {
-    error_log("in setRequestInfo");
     if (!isset($info)) {
         unset($_SESSION['openid_server_request']);
     } else {
