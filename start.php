@@ -29,10 +29,9 @@ function openid_server_init() {
 	$base = elgg_get_plugins_path() . 'openid_server/actions';
 	elgg_register_action('openid_server/trust', "$base/trust.php", 'public');
 
-        elgg_extend_view("metatags", "openid_server/metatags");
         elgg_extend_view("page/elements/head", "openid_server/metatags");
         elgg_extend_view("xrds/services", "openid_server/service");
-        elgg_extend_view("profile/wrapper", "openid_server/profile");
+        elgg_extend_view("user/default", "openid_server/profile");
 }
 
 
