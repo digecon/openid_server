@@ -44,10 +44,9 @@ function action_default()
             $response =& $request->answer(false, getServerURL());
         } else {
             if (!getLoggedInUser()) {
-                #return login_render();
+                $_SESSION['last_forward_from'] = current_page_url().'?'.http_build_query(Auth_OpenID::getQuery());
                 system_message(elgg_echo('openid_server:not_logged_in'));
-                return gatekeeper();
-                #return action_login();
+                forward('login');
             }
             return trust_render($request);
         }
