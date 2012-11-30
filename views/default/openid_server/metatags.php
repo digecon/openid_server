@@ -1,21 +1,6 @@
 <?php
-
-	/**
-	 * Adds metatags to identify OpenID server for openid 1.0
-	 * 
-	 * @package ElggOpenID
-	 * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
-	 * @author Kevin Jardine <kevin@radagast.biz>
-	 * @copyright Curverider Ltd 2008-2009
-	 * @link http://elgg.org/
-	 * 
-	 */
-
-	global $CONFIG;
-	$owner = elgg_get_page_owner_entity();
-	if ($owner && elgg_get_context() == 'profile') {
-?>
-	<link rel="openid.server" href="<?php echo $CONFIG->wwwroot; ?>mod/openid_server/server.php" />
-<?php
-	}
-?>
+$owner = elgg_get_page_owner_entity();
+echo '<link rel="openid2.provider openid.server" href="' . elgg_get_site_url() . 'mod/openid_server/server.php" />';
+if ($owner) {
+	echo '<link rel="openid2.local_id openid.delegate" href="' . elgg_get_site_url() . 'profile/' . $owner->username . '" />';
+}
