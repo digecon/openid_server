@@ -16,7 +16,7 @@ function init()
 {
 	global $CFG;
 
-	if (isloggedin()) {
+	if (elgg_is_logged_in()) {
 		setLoggedInUser(normaliseUsername($_SESSION['user']->username));
 	} else {
 		setLoggedInUser(null);
@@ -114,7 +114,7 @@ function isTrusted($identity_url, $trust_root, $return_to)
 function getLoggedInUser()
 {
     global $CONFIG;
-    if (isloggedin()) {
+    if (elgg_is_logged_in()) {
         return $CONFIG->wwwroot.'profile/'.$_SESSION['user']->username;
     } else {
         return '';

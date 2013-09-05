@@ -85,6 +85,6 @@ if (isadminloggedin()) {
 	}
 }		
 
-page_draw($title,$body);
+elgg_view_page($title,$body);
 
 ?>
